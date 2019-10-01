@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Name of your awesome camera app -->
+    <title>Camera App</title>
+    <!-- Link to your main style sheet-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <style type="text/css">
+        #container-circles {
+            position: absolute;
+            left: 45%;
+            bottom: 12%;
+        }
+        .inner-circle, #outer-circle {
+            position: absolute;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 33px;
+            left: calc(50% - 27px);
+            text-align: center;
+        }
+        #outer-circle {
+            /* height: 50px;
+            width: 50px; */
+            background-color: hsla(0,0%,100%,.4);
+            z-index: 1;
+        }
+
+        .inner-circle {
+            left: 72%;
+            top: 72%;
+            height: 22px;
+            width: 22px;
+            background: #fff;
+            margin: -22px 0 0 -22px;
+            z-index: 2;
+        }
+        .inner-circle, #outer-circle {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+
+        #container-files {
+            position: fixed;
+            left: 6%;
+            top: 6%;
+        }
+        .inner-file, #outer-file {
+            position: absolute;
+            /*border-radius: 50%;*/
+        }
+        #outer-file {
+            /*left: 170px;*/
+            /*height: 75px;*/
+            width: 75px;
+            background-color: hsla(0,0%,100%,.4);
+            z-index: 1;
+            color: #9a9a9a;
+        }
+
+        .inner-file {
+            /*left: 50%;*/
+            /*top: 38px;*/
+            height: 44px;
+            width: 44px;
+            /*background: #fff;*/
+            margin: -22px 0 0 -22px;
+            z-index: 2;
+        }
+        .inner-file, #outer-file {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+
+        #container-images {
+            position: fixed;
+            right: 12%;
+            top: 2%;
+        }
+        .inner-image, #outer-image {
+            position: absolute;
+            /*border-radius: 50%;*/
+        }
+        #outer-image {
+            /*left: 170px;*/
+            /*height: 75px;*/
+            width: 75px;
+            background-color: hsla(0,0%,100%,.4);
+            z-index: 1;
+            color: #9a9a9a;
+        }
+
+        .inner-image {
+            /*right:10%;*/
+            /*top: 38px;*/
+            height: 45px;
+            width: 47px;
+            /*background: #fff;*/
+            /*margin: -22px 0 0 -22px;*/
+            z-index: 2;
+        }
+        .inner-image, #outer-image {
+            position: absolute;
+               border-radius: 20%;  
+        }
+
+
+        .imgborder {
+            width: 100%;
+            height: auto;
+            position: relative;
+            background: url(//:0) no-repeat;
+            /*background-color: #48484896;*/
+        }
+        .in-imgborder {
+            width: 470px !important;
+            height: 350px !important;
+            position: absolute;
+            top: 12%;
+            left: 12%;
+            border: 2px dashed #fff;
+            outline: #48484896 solid 140px;
+        }
+
+        #CloseButton, #GalleryImages {
+            width: 45px;
+        }
+
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #CloseButton, #GalleryImages {
+                width: 40px !important;
+            }
+            #container-files {
+                left: 8% !important;
+                top: 12% !important;
+            }
+            #container-images {
+                right: 14% !important;
+            }
+            #container-circles {
+                bottom: 24% !important;
+            }
+        }
+
+        /* 
+          ##Device = Tablets, Ipads (landscape)
+          ##Screen = B/w 768px to 1024px
+        */
+
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            #CloseButton, #GalleryImages {
+                width: 40px !important;
+            }
+            #container-files {
+                left: 8% !important;
+                top: 12% !important;
+            }
+            #container-images {
+                right: 14% !important;
+            }
+            #container-circles {
+                bottom: 24% !important;
+            }
+        }
+
+        /* 
+          ##Device = Low Resolution Tablets, Mobiles (Landscape)
+          ##Screen = B/w 481px to 767px
+        */
+
+        @media (min-width: 481px) and (max-width: 767px) {
+            #CloseButton, #GalleryImages {
+                width: 40px !important;
+            }
+            #container-files {
+                left: 8% !important;
+                top: 7% !important;
+            }
+            #container-images {
+                right: 14% !important;
+            }
+            #container-circles {
+                bottom: 24% !important;
+            }
+        }
+
+        /* 
+          ##Device = Most of the Smartphones Mobiles (Portrait)
+          ##Screen = B/w 320px to 479px
+        */
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            #CloseButton, #GalleryImages {
+                width: 40px !important;
+            }
+            #container-files {
+                left: 8% !important;
+                top: 12% !important;
+            }
+            #container-images {
+                right: 14% !important;
+            }
+            #container-circles {
+                bottom: 24% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Camera -->
+    <main id="camera">
+        <!-- Camera sensor -->
+        <canvas id="camera--sensor"></canvas>
+        <!-- Camera view -->
+        <video id="camera--view" autoplay playsinline></video>
+        <!-- Camera output -->
+
+        <div class="imgborder">
+            <!-- <div class="in-imgborder" id="camera--output"></div> -->
+        </div>
+
+        <div id="container-circles">
+            <div id="outer-circle">
+                <div id="camera--trigger" class="inner-circle" class=""></div>
+            </div>
+        </div>
+
+        <div id="container-files">
+            <div id="outer-file">
+                <div class="inner-file" class="">
+                    <!-- <i class="fas fa-3x fa-chevron-circle-left"></i> -->
+                    <img src="close1.png" id="CloseButton">
+                </div>
+            </div>
+        </div>
+
+        <div id="container-images">
+            <div id="outer-image">
+                <div class="inner-image" class="">
+                    <!-- <i class="fas fa-3x fa-image"></i> -->
+                    <img src="gallery.png" id="GalleryImages" >
+                </div>
+            </div>
+        </div>
+        <img id="imgHasil" src="" />
+    </main>
+    <!-- Reference to your JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>
